@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Poem (bapa kami yang ada di sorga)</title>
+    <style>
+      body {
+        background-color: black;
+        color: white;
+        font-size: 24px;
+        font-family: Arial, sans-serif;
+        line-height: 1.5;
+      }
+
+      .container {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .poem {
+        width: 80%;
+        text-align: center;
+        margin-bottom: 50px;
+      }
+
+      .footer {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        text-align: center;
+        padding: 10px;
+        font-size: 16px;
+        background-color: white;
+        color: black;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="poem"></div>
+      <div class="footer">created by: Bangkit @2023 [poem by: Saut Situmorang]</div>
+    </div>
+
+    <script>
+      const poem = "di kepalaku ada gempa";
+      const poemWords = poem.split(" ");
+      const poemLength = poemWords.length;
+
+      let poemIndex = 0;
+      let poemHTML = "";
+
+      while (true) {
+        poemHTML += `<span>${poemWords[poemIndex]}</span> `;
+        poemIndex++;
+
+        if (poemIndex === poemLength) {
+          poemIndex = 0;
+        }
+
+        document.querySelector(".poem").innerHTML = poemHTML;
+
+        if (document.documentElement.scrollHeight === document.documentElement.clientHeight) {
+          break;
+        }
+      }
+
+      window.addEventListener("scroll", () => {
+        while (true) {
+          poemHTML += `<span>${poemWords[poemIndex]}</span> `;
+          poemIndex++;
+
+          if (poemIndex === poemLength) {
+            poemIndex = 0;
+          }
+
+          document.querySelector(".poem").innerHTML = poemHTML;
+
+          if (document.documentElement.scrollHeight === document.documentElement.clientHeight) {
+            break;
+          }
+
+          if (document.documentElement.scrollTop + document.documentElement.clientHeight >= document.documentElement.scrollHeight) {
+            break;
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
